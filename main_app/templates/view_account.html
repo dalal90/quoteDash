@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Account</title>
+    <style>
+                .continer{
+            margin-left: 100px;
+            margin-right: 100px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .main{
+            margin: 30px;
+            font-style: oblique;
+            background-color:burlywood
+        }
+        .header {
+            display: flex;
+            float:right;
+        }
+        body,label{
+            text-align: center;
+            font-size:large;
+        }
+        input{
+            margin-left: 40px;
+            margin-bottom: 10px;
+            width: 250px;
+            height: 20px;
+        }
+        h2{
+            float: left;
+            color: darkolivegreen;
+        }
+        p{
+            color:black;
+        }
+        h5{
+            font-family:Times;
+        }
+        td{
+        padding: 10px;
+        width: 700px;
+    }
+    table{
+        border-top: rgb(41, 40, 40) solid;
+        border-bottom: rgb(41, 40, 40) solid;
+        border-right: rgb(41, 40, 40) solid;
+        border-left: rgb(41, 40, 40) solid;
+    }
+
+    </style>
+</head>
+<body class='main'>
+    <div class="header">
+        <a href='/dashboard'>Back</a>
+        <a href='/clear'><button>log out</button></a>
+    </div>
+    <h1>{{Poster.first_name}}s' Quote!  </h1>
+
+<table>
+    
+    {% for Poster in Poster.poster.all %}
+    <tr>
+    <td><p>{{ Poster.Author }}: {{ Poster.quote }}</p></td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

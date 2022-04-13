@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Dashboard</title>
+    <style>
+        .err{
+            font-family: 'Times New Roman', Times, serif;
+            color: darkred;
+            font-size: medium;
+            text-align:center;
+            background-color: beige;
+            margin-left: 100px;
+            margin-right: 100px;
+        
+        }
+                .continer{
+            margin-left: 100px;
+            margin-right: 100px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .main{
+            margin: 30px;
+            font-style: oblique;
+            background-color:burlywood
+        }
+        .header {
+            display: flex;
+            float:right;
+        }
+        body,label{
+            text-align: center;
+            font-size:large;
+        }
+        input{
+            margin-left: 40px;
+            margin-bottom: 10px;
+            width: 250px;
+            height: 20px;
+        }
+        h2{
+            float: left;
+            color: darkolivegreen;
+        }
+        p{
+            color:black;
+        }
+        h5{
+            font-family:Times;
+        }
+        td{
+        padding: 10px;
+        width: 500px;
+    }
+
+    tr:nth-of-type(even){
+        background-color: #f3f3f3;
+    }
+    </style>
+</head>
+<body class='main'>
+    <h1>Welcome !! {{request.session.fname}}  </h1>
+    <div class="header">
+        <a href='edit_account/{{request.session.uid}}'>Edit my account</a>
+        <a href='/clear'><button>log out</button></a>
+    </div>
+    <div class='continer'>
+        <table>
+            <th>
+                <tr>
+                    <td>Quotes :</td>
+                </tr>
+            </th>
+            {% for qoute in all_qoute  %}
+            <tr>
+                <td>{{qoute.Author}}:
+                    {{qoute.quote}}
+                    <a href="/view_account/{{qoute.poster.id}}">Posted by:{{qoute.poster.first_name}}</a>
+                    {% if qoute.poster.id == request.session.uid %}
+                    <a href="/delete/{{qoute.id}}"><button>Delete</button></a>
+                    {% endif %}
+                    {% if qoute.poster.id != request.session.uid %}
+                    <a href="#"><button>Like</button></a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        <form action='add_quote' method="POST">
+            <div class="err">
+                {% for msg1 in messages %}
+                <p><li>{{ msg1 }}</li></p>
+                {% endfor %}
+            </div>
+            {% csrf_token %}   
+    
+            <h1> Add Quote!  </h1><br>
+    
+        <h3>Author :</h3>
+            <input type='text' name='Author'><br>
+    
+        <h3>Quote:</h3>
+            <textarea name='quote' rows='10' cols='35'></textarea><br>
+        
+            <button type="submit">Submit</button><br>
+            </form>
+    </div>
+    </body>
+</html>

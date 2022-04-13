@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Account</title>
+    <style>
+        .err{
+            font-family: 'Times New Roman', Times, serif;
+            color: darkred;
+            font-size: medium;
+            text-align:center;
+            background-color: beige;
+            margin-left: 100px;
+            margin-right: 100px;
+        
+        }
+                .continer{
+            margin-left: 100px;
+            margin-right: 100px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .main{
+            margin: 30px;
+            font-style: oblique;
+            background-color:burlywood
+        }
+        .header {
+            display: flex;
+            float:right;
+        }
+        body,label{
+            text-align: center;
+            font-size:large;
+        }
+        input{
+            margin-left: 40px;
+            margin-bottom: 10px;
+            width: 250px;
+            height: 20px;
+        }
+        h2{
+            float: left;
+            color: darkolivegreen;
+        }
+        p{
+            color:black;
+        }
+        h5{
+            font-family:Times;
+        }
+        td{
+        padding: 10px;
+        width: 100px;
+    }
+    table{
+        border-top: rgb(41, 40, 40) solid;
+        border-bottom: rgb(41, 40, 40) solid;
+        border-right: rgb(41, 40, 40) solid;
+        border-left: rgb(41, 40, 40) solid;
+    }
+    tr:nth-of-type(even){
+        background-color: #f3f3f3;
+    }
+    </style>
+</head>
+<body class='main'>
+    <h1>Edit my Account  </h1>
+    <div class="header">
+        <a href='/dashboard'>Back</a>
+        <a href='/clear'><button>log out</button></a>
+    </div>
+    <div class="err"> 
+        {% if messages %}
+            {% for msg in messages %}
+            <li> {{ msg }}</li>
+            {% endfor %}
+        {% endif %}
+        </div>
+    <form action='/updated_account/{{ this_user.id }}' method='POST'>
+        {% csrf_token %}
+        <h3>First Name :</h3>
+        <input type='text' name='f_name'>
+        <h3>Last Name :</h3>
+        <input type='text' name='l_name'>
+        <h3>Email :</h3>
+        <input type='text' name='Email'>
+        <button>Update!</button>
+    </form>
+
+</body>
+</html>
